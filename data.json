@@ -1,0 +1,19 @@
+{
+    "hotspots": [
+        {
+            "id": "sample",
+            "category": "stormwater",
+            "position": {
+                "bottom": "35%",
+                "left": "1200px"
+            },
+            "size": {
+                "width": "150px",
+                "height": "150px"
+            },
+            "modal": {
+                "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus urna leo, dignissim vitae cursus eu, ornare vel nulla. Donec viverra, lectus eu bibendum ultricies, odio sapien semper nisl, in gravida magna est ut nibh. Cras fermentum purus ut risus congue laoreet. Sed gravida ac tortor id dapibus. Nunc eleifend ex quam, varius pretium ipsum feugiat ac. Ut mi elit, aliquam et convallis nec, luctus consequat nulla. Mauris rutrum vel purus vitae porta. Nulla in feugiat quam, volutpat suscipit enim. Proin non pellentesque mi."
+            }
+        }
+    ]
+}

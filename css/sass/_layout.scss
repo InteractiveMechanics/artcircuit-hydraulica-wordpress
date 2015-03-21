@@ -1,0 +1,111 @@
+html,
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+}
+
+#wrapper {
+    height: 100%;
+    width: 100%;
+    background: #B2EBF2;
+
+    .inner {
+        position: relative;
+        width: 3000px;
+        height: 100%;
+        background: $sky-blue;
+        background: -webkit-linear-gradient(top, $sky-blue, $sky-yellow);
+        background: -o-linear-gradient(bottom, $sky-blue, $sky-yellow);
+        background: -moz-linear-gradient(bottom, $sky-blue, $sky-yellow);
+        background: linear-gradient(to bottom, $sky-blue, $sky-yellow);
+
+        div {
+            width: inherit;
+            position: absolute;
+            cursor: move;
+    
+            &.clouds {
+                height: 30%;
+                top: 0;
+                z-index: 1;
+                background-image: url(../images/clouds@2x.png);
+                background-size: 100%;
+                background-position: center top;
+            }
+            &.skyline {
+                height: 30%;
+                bottom: 70%;
+                z-index: 2;
+            }
+            &.trees {
+                background: #81C784;
+                bottom: 50%;
+                height: 20%;
+                z-index: 3;
+            }
+            &.foreground {
+                background: #388E3C;
+                bottom: 0;
+                height: 50%;
+                z-index: 4;
+
+                .ground {
+                    height: 50%;
+                    top: 0;
+                    background: transparent;
+                }
+                .water {
+                    height: 50%;
+                    bottom: 0;
+                    background: #40C4FF;
+                    border-top: 10px solid #A7A9AB;
+                }
+            }
+        }
+        div.hotspots {
+            height: 100%;
+
+            > .hotspot {
+                background: orange;
+                z-index: 20;
+                cursor: pointer;
+            }
+        }
+    }
+}
+
+.modal-container {
+    z-index: 999;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: 0.5s opacity;
+
+    &.in {
+        opacity: 1;
+    }
+
+    .modal {
+        max-width: 650px;
+        background: white;
+        padding: 30px;
+        margin: 60px auto;
+        position: relative;
+        z-index: 1000;
+    }
+    .overlay {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: white;
+        opacity: 0.35;
+    }
+}

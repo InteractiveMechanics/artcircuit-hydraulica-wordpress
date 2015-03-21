@@ -1,0 +1,90 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  overflow: hidden; }
+
+#wrapper {
+  height: 100%;
+  width: 100%;
+  background: #B2EBF2; }
+  #wrapper .inner {
+    position: relative;
+    width: 3000px;
+    height: 100%;
+    background: #BBE5F3;
+    background: -webkit-linear-gradient(top, #BBE5F3, #EFF4CF);
+    background: -o-linear-gradient(bottom, #BBE5F3, #EFF4CF);
+    background: -moz-linear-gradient(bottom, #BBE5F3, #EFF4CF);
+    background: linear-gradient(to bottom, #BBE5F3, #EFF4CF); }
+    #wrapper .inner div {
+      width: inherit;
+      position: absolute;
+      cursor: move; }
+      #wrapper .inner div.clouds {
+        height: 30%;
+        top: 0;
+        z-index: 1;
+        background-image: url(../images/clouds@2x.png);
+        background-size: 100%;
+        background-position: center top; }
+      #wrapper .inner div.skyline {
+        height: 30%;
+        bottom: 70%;
+        z-index: 2; }
+      #wrapper .inner div.trees {
+        background: #81C784;
+        bottom: 50%;
+        height: 20%;
+        z-index: 3; }
+      #wrapper .inner div.foreground {
+        background: #388E3C;
+        bottom: 0;
+        height: 50%;
+        z-index: 4; }
+        #wrapper .inner div.foreground .ground {
+          height: 50%;
+          top: 0;
+          background: transparent; }
+        #wrapper .inner div.foreground .water {
+          height: 50%;
+          bottom: 0;
+          background: #40C4FF;
+          border-top: 10px solid #A7A9AB; }
+    #wrapper .inner div.hotspots {
+      height: 100%; }
+      #wrapper .inner div.hotspots > .hotspot {
+        background: orange;
+        z-index: 20;
+        cursor: pointer; }
+
+.modal-container {
+  z-index: 999;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: 0.5s opacity; }
+  .modal-container.in {
+    opacity: 1; }
+  .modal-container .modal {
+    max-width: 650px;
+    background: white;
+    padding: 30px;
+    margin: 60px auto;
+    position: relative;
+    z-index: 1000; }
+  .modal-container .overlay {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: black;
+    opacity: 0.75; }
+
+/*# sourceMappingURL=main.css.map */
