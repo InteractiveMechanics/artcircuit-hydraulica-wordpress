@@ -11,57 +11,110 @@ body {
     height: 100%;
     width: 100%;
     background: #B2EBF2;
-
+    
     .inner {
         position: relative;
         width: 3000px;
         height: 100%;
-        background: $sky-blue;
-        background: -webkit-linear-gradient(top, $sky-blue, $sky-yellow);
-        background: -o-linear-gradient(bottom, $sky-blue, $sky-yellow);
-        background: -moz-linear-gradient(bottom, $sky-blue, $sky-yellow);
-        background: linear-gradient(to bottom, $sky-blue, $sky-yellow);
+        top: 0px !important;
+
+        @media screen and #{$screen-xs} {
+            zoom: 0.85;
+            width: 2900px;
+        }
 
         div {
-            width: inherit;
+            width: 3000px;
             position: absolute;
             cursor: move;
-    
-            &.clouds {
-                height: 30%;
-                top: 0;
+            
+            &.sky {
+                height: 50%;
+                bottom: 50%;
                 z-index: 1;
-                background-image: url(../images/clouds@2x.png);
+                background-image: url(../images/sky@2x.jpg);
                 background-size: 100%;
-                background-position: center top;
+                background-position: center bottom;
+                background-repeat: repeat-x;
             }
             &.skyline {
-                height: 30%;
-                bottom: 70%;
+                height: 100%;
+                bottom: 350px;
                 z-index: 2;
+                background-image: url(../images/skyline@2x.png);
+                background-size: 72%;
+                background-position: center bottom;
+                background-repeat: repeat-x;
             }
             &.trees {
-                background: #81C784;
-                bottom: 50%;
-                height: 20%;
+                bottom: 250px;
+                height: 100%;
                 z-index: 3;
+                background-image: url(../images/trees@2x.png);
+                background-size: 100%;
+                background-position: center bottom;
+                background-repeat: no-repeat;
             }
             &.foreground {
-                background: #388E3C;
                 bottom: 0;
-                height: 50%;
-                z-index: 4;
+                height: 100%;
 
                 .ground {
-                    height: 50%;
-                    top: 0;
-                    background: transparent;
-                }
-                .water {
-                    height: 50%;
+                    height: 100%;
                     bottom: 0;
-                    background: #40C4FF;
-                    border-top: 10px solid #A7A9AB;
+                    background-image: url(../images/riverbank@2x.png);
+                    background-size: 100%;
+                    background-position: center bottom;
+                    background-repeat: repeat-x;
+                    z-index: 4;
+                }
+                .river {
+                    bottom: 0;
+                    height: 250px;
+                    width: 3000px;
+                    overflow: hidden;
+
+                    .water {
+                        height: 100px;
+                        left: -50px;
+                        bottom: 0;
+                        width: 3200px;
+                        background-image: url(../images/river@2x.png);
+                        background-size: 100%;
+                        background-position: center top;
+                        background-repeat: repeat-x;
+
+                        &:nth-child(1n){
+                            bottom: -20px;
+                            z-index: 16;
+                        }
+                        &:nth-child(2n){
+                            bottom: 0;
+                            z-index: 15;
+                            left: -75px;
+                        }
+                        &:nth-child(3n){
+                            bottom: 20px;
+                            z-index: 14;
+                        }
+                        &:nth-child(4n){
+                            bottom: 40px;
+                            z-index: 13;
+                            left: -75px;
+                        }
+                        &:nth-child(5n){
+                            bottom: 60px;
+                            z-index: 12;
+                        }
+                        &:nth-child(6n){
+                            bottom: 80px;
+                            z-index: 11;
+                        }
+                        &:nth-child(7n){
+                            bottom: 100px;
+                            z-index: 10;
+                        }
+                    }
                 }
             }
         }
@@ -69,43 +122,12 @@ body {
             height: 100%;
 
             > .hotspot {
-                background: orange;
                 z-index: 20;
                 cursor: pointer;
+                background-size: 100%;
+                display: block;
+                position: absolute;
             }
         }
-    }
-}
-
-.modal-container {
-    z-index: 999;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    opacity: 0;
-    transition: 0.5s opacity;
-
-    &.in {
-        opacity: 1;
-    }
-
-    .modal {
-        max-width: 650px;
-        background: white;
-        padding: 30px;
-        margin: 60px auto;
-        position: relative;
-        z-index: 1000;
-    }
-    .overlay {
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        background: white;
-        opacity: 0.35;
     }
 }

@@ -1,0 +1,35 @@
+.alert {
+    width: 100%;
+    text-align: center;
+    display: block;
+    height: 14px;
+    background: #328795;
+    position: relative;
+    z-index: 99;
+    padding: 8px 0;
+    font-size: 14px;
+    font-weight: 700;
+    color: lighten(#328795, 35%);
+    transition: 0.5s all;
+
+    > .close {
+        position: absolute;
+        right: 0;
+        top: 0;
+        font-size: 18px;
+        padding: 7px 6px 5px;
+        color: lighten(#328795, 35%);
+
+        &:hover {
+            color: white;
+        }
+    }
+
+    &:hover {
+        color: white;
+    }
+
+    & + .menu-link {
+        top: 50px;
+    }
+}

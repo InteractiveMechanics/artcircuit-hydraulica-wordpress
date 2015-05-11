@@ -1,0 +1,71 @@
+@mixin generateColorShift($name, $color1, $color2, $color3){
+    @-webkit-keyframes colorShift#{$name} {
+        0% {
+            fill: $color1;
+        }
+        25% {
+            fill: $color2;
+        }
+        50% {
+            fill: $color3;
+        }
+        75% {
+            fill: $color1;
+        }
+    }
+    @keyframes colorShift#{$name} {
+        0% {
+            fill: $color1;
+        }
+        25% {
+            fill: $color2;
+        }
+        50% {
+            fill: $color3;
+        }
+        75% {
+            fill: $color1;
+        }
+    }
+}
+@include generateColorShift(Back, #498DC1, #255C8C, #002A57);
+@include generateColorShift(Front, #002A57, #498DC1, #255C8C);
+@include generateColorShift(Mid, #255C8C, #002A57, #498DC1);
+
+.hotspot-indicator {
+    width: 40px;
+    height: 40px;
+    display: block;
+    position: absolute;
+    z-index: 20;
+    left: 50%;
+    margin-left: -20px;
+    top: -40px;
+    cursor: pointer;
+
+    > svg { 
+        width: 40px; 
+        height: 40px;
+    }
+}
+
+.hotspot:hover {
+    #drop_x5F_back_1_ {
+        -o-animation: colorShiftBack 2s linear infinite normal both;
+        -moz-animation: colorShiftBack 2s linear infinite normal both;
+        -webkit-animation: colorShiftBack 2s linear infinite normal both;
+        animation: colorShiftBack 2s linear infinite normal both;
+    }
+    #drop_x5F_mid_1_ {
+        -o-animation: colorShiftMid 2s linear infinite normal both;
+        -moz-animation: colorShiftMid 2s linear infinite normal both;
+        -webkit-animation: colorShiftMid 2s linear infinite normal both;
+        animation: colorShiftMid 2s linear infinite normal both;
+    }
+    #drop_x5F_front_2_ {
+        -o-animation: colorShiftFront 2s linear infinite normal both;
+        -moz-animation: colorShiftFront 2s linear infinite normal both;
+        -webkit-animation: colorShiftFront 2s linear infinite normal both;
+        animation: colorShiftFront 2s linear infinite normal both;
+    }
+}
