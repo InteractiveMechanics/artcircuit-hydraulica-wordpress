@@ -1,4 +1,4 @@
-@import url('http://fonts.googleapis.com/css?family=Istok+Web:400,700,400italic,700italic');
+@import url('http://fonts.googleapis.com/css?family=Open+Sans:300,400,700,400italic,700italic');
 
 // COLORS
 $sky-blue       : #BBE5F3;
@@ -6,11 +6,11 @@ $sky-yellow     : #EFF4CF;
 
 
 // Media Queries
-$screen-xs			    : "(max-width: 767px)";
-$screen-sm			    : "(min-width: 768px) and (max-width: 991px)";
-$screen-md			    : "(min-width: 992px) and (max-width: 1199px)";
-$screen-lg			    : "(min-width: 1200px)";
-$screen-xl              : "(min-width: 1440px)";
+$screen-xs		: "(max-width: 767px)";
+$screen-sm	    : "(min-width: 768px) and (max-width: 991px)";
+$screen-md	    : "(min-width: 992px) and (max-width: 1199px)";
+$screen-lg		: "(min-width: 1200px)";
+$screen-xl      : "(min-width: 1440px)";
 
 
 // Helpers

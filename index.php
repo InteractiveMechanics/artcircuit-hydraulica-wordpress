@@ -49,32 +49,11 @@
     <?php wp_head(); ?>
 </head>
 <body>
-    <?php $post_array = get_pages('pagename = settings'); ?>
-    <?php foreach ( $post_array as $post ) : setup_postdata( $post ); ?>
-        <?php if(get_field('show_alert')): ?>
-            <a class="alert" target="_blank" href="<?php the_field('alert_link'); ?>">
-                <?php the_field('alert_text'); ?>
-                <span class="close">&times;</span>
-            </a>
-        <?php endif; ?>
-    <?php endforeach; wp_reset_postdata();?>
-
     <a class="menu-link">
         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" height="32px" id="Layer_1" style="enable-background:new 0 0 32 32;" version="1.1" viewBox="0 0 32 32" width="32px" xml:space="preserve">
             <path d="M4,10h24c1.104,0,2-0.896,2-2s-0.896-2-2-2H4C2.896,6,2,6.896,2,8S2.896,10,4,10z M28,14H4c-1.104,0-2,0.896-2,2  s0.896,2,2,2h24c1.104,0,2-0.896,2-2S29.104,14,28,14z M28,22H4c-1.104,0-2,0.896-2,2s0.896,2,2,2h24c1.104,0,2-0.896,2-2 S29.104,22,28,22z"/>
         </svg>
     </a>
-    <nav id="menu" class="panel" role="navigation">
-        <ul class="panel-inner">
-            <li class="header">Art on the Circuit</li>
-            <?php wp_nav_menu( 
-                array(
-                    'menu'          => 'Sidebar Menu',
-                    'items_wrap'    => '%3$s',
-                    'container'     => ''
-            )); ?>
-        </ul>
-    </nav>
     <div id="wrapper">
         <div class="inner">
             <div class="sky"></div>
@@ -95,6 +74,54 @@
             <div class="hotspots"></div>
         </div>
     </div>
+
+    <?php $post_array = get_pages('pagename = settings'); ?>
+    <?php foreach ( $post_array as $post ) : setup_postdata( $post ); ?>
+        <nav id="menu" class="panel" role="navigation">
+            <ul class="panel-inner">
+                <li class="header">Art on the Circuit</li>
+                <?php wp_nav_menu( 
+                    array(
+                        'menu'          => 'Sidebar Menu',
+                        'items_wrap'    => '%3$s',
+                        'container'     => ''
+                )); ?>
+            </ul>
+            <div class="credits">
+                Copyright &copy; <?php echo date('Y'); ?> Art on the Circuit.
+                <div class="hidden-xs">
+                    <hr>
+                    <?php the_field('credits'); ?>
+                </div>
+            </div>
+        </nav>
+
+        <?php if(get_field('show_alert')): ?>
+            <a class="alert" target="_blank" href="<?php the_field('alert_link'); ?>">
+                <?php the_field('alert_text'); ?>
+                <span class="close">&times;</span>
+            </a>
+        <?php endif; ?>
+
+        <?php if(get_field('show_welcome_modal')): ?>
+            <div id="welcome-modal" class="modal fade in" tabindex="-1" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-body">
+                            <h2><?php the_field('welcome_modal_title'); ?></h2>
+                            <p><?php the_field('welcome_modal_body'); ?></p>
+                            <a class="close-welcome"><?php the_field('welcome_modal_link_text'); ?> &raquo;</a>
+                            <?php if(get_field('show_alert_in_welcome')): ?>
+                                <a target="_blank" href="<?php the_field('alert_link'); ?>">Give us your feedback &raquo;</a>
+                            <?php endif; ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="overlay in"></div>
+        <?php endif; ?>
+    <?php endforeach; wp_reset_postdata(); ?>
+
     <script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
     <script src="<?php bloginfo('template_directory'); ?>/js/vendor/jquery.pep.js"></script>
     <script src="<?php bloginfo('template_directory'); ?>/js/vendor/jquery.cookie.js"></script>
@@ -136,7 +163,6 @@
                     -wDiff
                 ];
             };
-
             var $pep = $wrapper.pep({
                 constrainTo: constrainArray(),
                 axis: 'x',
@@ -163,8 +189,6 @@
         }
 
         function createHotspot(e) {
-            //e.stopPropagation();
-
             var title = $(this).attr('data-modal-title');
             var content = $(this).attr('data-modal-content');
             var link = $(this).attr('data-modal-link');
@@ -189,48 +213,82 @@
                         '<div class="overlay"></div>';
 
             $('body').append(html);
+            unfuckModals();
             setTimeout(function(){ 
                 $('.modal').addClass('in');
                 $('.overlay').addClass('in');
             }, 100);
-            //return false;
         }
 
         function createEvents() {
-            $('body').on('touchmove', function(e) {
-                if(!e._isScroller) { e.preventDefault(); }
+            $(document).on('touchmove', function(e) {
+                if( $(e.target).hasClass('modal') || $(e.target).closest('.modal').length ){
+                    return;
+                }
+                e.preventDefault();
             });
 
-            $(document).on('click', '.hotspot', createHotspot);
+            $(window).resize(unfuckModals);
 
-            $(document).on('click', '.modal', function(){
+            $(document).on('click', '.hotspot', createHotspot);
+            $(document).on('touchstart click', '.menu-link', togglePanel);
+
+            $(document).on('touchstart click', '.modal', function(){
                 closeModal();
             });
 
-            $(document).on('click', '.modal-dialog', function(e){
+            $(document).on('touchstart click', '.modal-dialog', function(e){
                 e.stopPropagation();
             });
             
-            $(document).on('click', '.alert .close', function(e){
+            $(document).on('touchstart click', '.alert .close', function(e){
                 e.preventDefault();
                 $(this).parent().remove();
                 $.cookie('alert', 'hidden', { expires: 14 });
             });
             
-            $(document).on('click', '.modal .close', function(e){
+            $(document).on('tap click', '.modal .close', function(e){
                 e.preventDefault();
                 closeModal();
             });
 
-            $(document).on('click', '.menu-link', togglePanel);
+            $('.modal').on('touchmove', function(e){
+                return true;
+            });
+
+            $(document).on('touchstart click', '.close-welcome', function(){
+                closeModal();
+                $.cookie('welcome', 'hidden', { expires: 14 });
+            });
+        }
+
+        function staggerHighlights() {
+            $('.hotspot-indicator svg').each(function() {
+                var random = Math.floor((Math.random() * 5) + 1);
+
+                $(this).css('-moz-animation-delay', random + 's');
+                $(this).css('-webkit-animation-delay', random + 's');
+                $(this).css('animation-delay', random + 's');
+            });
+        }
+
+        function unfuckModals() {
+            var width = $(window).width();
+
+            $('.modal').width(width);
         }
         
         $(function(){
             buildHotspots(data);
             setDraggable();
             createEvents();
+            unfuckModals();
             
-            if ($.cookie('alert') == 'hidden'){ $('.alert').remove(); }
+            if ($.cookie('alert') == 'hidden'){ 
+                $('.alert').remove(); }
+            if ($.cookie('welcome') == 'hidden'){ 
+                $('.modal').remove(); 
+                $('.overlay').remove(); }
         });
     </script>
 

@@ -1,40 +1,34 @@
+$blur: 24px;
+
 @-moz-keyframes pulsing {
-    0%   { box-shadow: 0 0 8px rgba(255,255,255, 0); }
-    50%  { box-shadow: 0 0 8px rgba(255,255,255, 0.75); }
-    100% { box-shadow: 0 0 8px rgba(255,255,255, 0); }
+    0%   { box-shadow: 0 0 $blur rgba(255,255,255, 0); }
+    50%  { box-shadow: 0 0 $blur rgba(255,255,255, 1); }
+    100% { box-shadow: 0 0 $blur rgba(255,255,255, 0); }
 }
 @-webkit-keyframes pulsing {
-    0%   { box-shadow: 0 0 8px rgba(255,255,255, 0); }
-    50%  { box-shadow: 0 0 8px rgba(255,255,255, 0.75); }
-    100% { box-shadow: 0 0 8px rgba(255,255,255, 0); }
+    0%   { box-shadow: 0 0 $blur rgba(255,255,255, 0); }
+    50%  { box-shadow: 0 0 $blur rgba(255,255,255, 1); }
+    100% { box-shadow: 0 0 $blur rgba(255,255,255, 0); }
 }
 @keyframes pulsing {
-    0%   { box-shadow: 0 0 8px rgba(255,255,255, 0); }
-    50%  { box-shadow: 0 0 8px rgba(255,255,255, 0.75); }
-    100% { box-shadow: 0 0 8px rgba(255,255,255, 0); }
+    0%   { box-shadow: 0 0 $blur rgba(255,255,255, 0); }
+    50%  { box-shadow: 0 0 $blur rgba(255,255,255, 1); }
+    100% { box-shadow: 0 0 $blur rgba(255,255,255, 0); }
 }
 
 .hotspot-indicator {
-    width: 40px;
-    height: 40px;
+    width: 48px;
+    height: 48px;
     display: block;
     position: absolute;
     z-index: 20;
     left: 50%;
-    margin-left: -20px;
-    top: -40px;
+    margin-left: -24px;
+    top: -44px;
     cursor: pointer;
 
     > svg { 
-        width: 40px; 
-        height: 40px;
-
-        #drop_x5F_front_1_,
-        #drop_x5F_mid_1_,
-        #drop_x5F_back_1_ {
-            -moz-animation: pulsing 4s linear infinite alternate;
-            -webkit-animation: pulsing 4s linear infinite alternate;
-            animation: pulsing 4s linear infinite alternate;
-        }
+        width: 48px; 
+        height: 48px;
     }
 }

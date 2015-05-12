@@ -2,23 +2,29 @@
     width: 100%;
     text-align: center;
     display: block;
-    height: 14px;
+    height: 34px;
     background: #328795;
     position: relative;
     z-index: 99;
-    padding: 8px 0;
+    padding: 7px 0 9px;
     font-size: 14px;
     font-weight: 700;
     color: lighten(#328795, 35%);
     transition: 0.5s all;
+    border: none;
+    border-radius: 0;
+    margin: 0;
 
     > .close {
         position: absolute;
         right: 0;
         top: 0;
         font-size: 18px;
-        padding: 7px 6px 5px;
+        font-weight: 400;
+        padding: 7px 10px 8px;
         color: lighten(#328795, 35%);
+        text-shadow: none;
+        opacity: 1;
 
         &:hover {
             color: white;
@@ -30,6 +36,6 @@
     }
 
     & + .menu-link {
-        top: 50px;
+        top: 34px;
     }
 }

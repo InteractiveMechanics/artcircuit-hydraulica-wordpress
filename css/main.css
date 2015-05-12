@@ -1,4 +1,4 @@
-@import url("http://fonts.googleapis.com/css?family=Istok+Web:400,700,400italic,700italic");
+@import url("http://fonts.googleapis.com/css?family=Open+Sans:300,400,700,400italic,700italic");
 .user-selectable-none, .panel {
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -7,7 +7,7 @@
   user-select: none; }
 
 * {
-  font-family: 'Istok Web', sans-serif !important; }
+  font-family: 'Open Sans', sans-serif !important; }
 
 a, a:focus, a:hover, a:active {
   text-decoration: none; }
@@ -18,7 +18,8 @@ body {
   padding: 0;
   height: 100%;
   width: 100%;
-  overflow: hidden; }
+  overflow: hidden;
+  overflow-x: hidden; }
 
 #wrapper {
   height: 100%;
@@ -33,11 +34,23 @@ body {
       #wrapper .inner {
         zoom: 0.85;
         width: 2900px; } }
-    #wrapper .inner div {
+    #wrapper .inner > div.sky,
+    #wrapper .inner > div.skyline,
+    #wrapper .inner > div.trees,
+    #wrapper .inner > div.foreground,
+    #wrapper .inner > div.foreground > .ground,
+    #wrapper .inner > div.foreground > .river,
+    #wrapper .inner > div.foreground > .river > .water {
       width: 3000px;
       position: absolute;
       cursor: move; }
-      #wrapper .inner div.sky {
+      #wrapper .inner > div.sky.sky,
+      #wrapper .inner > div.skyline.sky,
+      #wrapper .inner > div.trees.sky,
+      #wrapper .inner > div.foreground.sky,
+      #wrapper .inner > div.foreground > .ground.sky,
+      #wrapper .inner > div.foreground > .river.sky,
+      #wrapper .inner > div.foreground > .river > .water.sky {
         height: 50%;
         bottom: 50%;
         z-index: 1;
@@ -45,7 +58,13 @@ body {
         background-size: 100%;
         background-position: center bottom;
         background-repeat: repeat-x; }
-      #wrapper .inner div.skyline {
+      #wrapper .inner > div.sky.skyline,
+      #wrapper .inner > div.skyline.skyline,
+      #wrapper .inner > div.trees.skyline,
+      #wrapper .inner > div.foreground.skyline,
+      #wrapper .inner > div.foreground > .ground.skyline,
+      #wrapper .inner > div.foreground > .river.skyline,
+      #wrapper .inner > div.foreground > .river > .water.skyline {
         height: 100%;
         bottom: 350px;
         z-index: 2;
@@ -53,7 +72,13 @@ body {
         background-size: 72%;
         background-position: center bottom;
         background-repeat: repeat-x; }
-      #wrapper .inner div.trees {
+      #wrapper .inner > div.sky.trees,
+      #wrapper .inner > div.skyline.trees,
+      #wrapper .inner > div.trees.trees,
+      #wrapper .inner > div.foreground.trees,
+      #wrapper .inner > div.foreground > .ground.trees,
+      #wrapper .inner > div.foreground > .river.trees,
+      #wrapper .inner > div.foreground > .river > .water.trees {
         bottom: 250px;
         height: 100%;
         z-index: 3;
@@ -61,10 +86,22 @@ body {
         background-size: 100%;
         background-position: center bottom;
         background-repeat: no-repeat; }
-      #wrapper .inner div.foreground {
+      #wrapper .inner > div.sky.foreground,
+      #wrapper .inner > div.skyline.foreground,
+      #wrapper .inner > div.trees.foreground,
+      #wrapper .inner > div.foreground.foreground,
+      #wrapper .inner > div.foreground > .ground.foreground,
+      #wrapper .inner > div.foreground > .river.foreground,
+      #wrapper .inner > div.foreground > .river > .water.foreground {
         bottom: 0;
         height: 100%; }
-        #wrapper .inner div.foreground .ground {
+        #wrapper .inner > div.sky.foreground .ground,
+        #wrapper .inner > div.skyline.foreground .ground,
+        #wrapper .inner > div.trees.foreground .ground,
+        #wrapper .inner > div.foreground.foreground .ground,
+        #wrapper .inner > div.foreground > .ground.foreground .ground,
+        #wrapper .inner > div.foreground > .river.foreground .ground,
+        #wrapper .inner > div.foreground > .river > .water.foreground .ground {
           height: 100%;
           bottom: 0;
           background-image: url(../images/riverbank@2x.png);
@@ -72,12 +109,24 @@ body {
           background-position: center bottom;
           background-repeat: repeat-x;
           z-index: 4; }
-        #wrapper .inner div.foreground .river {
+        #wrapper .inner > div.sky.foreground .river,
+        #wrapper .inner > div.skyline.foreground .river,
+        #wrapper .inner > div.trees.foreground .river,
+        #wrapper .inner > div.foreground.foreground .river,
+        #wrapper .inner > div.foreground > .ground.foreground .river,
+        #wrapper .inner > div.foreground > .river.foreground .river,
+        #wrapper .inner > div.foreground > .river > .water.foreground .river {
           bottom: 0;
           height: 250px;
           width: 3000px;
           overflow: hidden; }
-          #wrapper .inner div.foreground .river .water {
+          #wrapper .inner > div.sky.foreground .river .water,
+          #wrapper .inner > div.skyline.foreground .river .water,
+          #wrapper .inner > div.trees.foreground .river .water,
+          #wrapper .inner > div.foreground.foreground .river .water,
+          #wrapper .inner > div.foreground > .ground.foreground .river .water,
+          #wrapper .inner > div.foreground > .river.foreground .river .water,
+          #wrapper .inner > div.foreground > .river > .water.foreground .river .water {
             height: 100px;
             left: -50px;
             bottom: 0;
@@ -86,27 +135,69 @@ body {
             background-size: 100%;
             background-position: center top;
             background-repeat: repeat-x; }
-            #wrapper .inner div.foreground .river .water:nth-child(1n) {
+            #wrapper .inner > div.sky.foreground .river .water:nth-child(1n),
+            #wrapper .inner > div.skyline.foreground .river .water:nth-child(1n),
+            #wrapper .inner > div.trees.foreground .river .water:nth-child(1n),
+            #wrapper .inner > div.foreground.foreground .river .water:nth-child(1n),
+            #wrapper .inner > div.foreground > .ground.foreground .river .water:nth-child(1n),
+            #wrapper .inner > div.foreground > .river.foreground .river .water:nth-child(1n),
+            #wrapper .inner > div.foreground > .river > .water.foreground .river .water:nth-child(1n) {
               bottom: -20px;
               z-index: 16; }
-            #wrapper .inner div.foreground .river .water:nth-child(2n) {
+            #wrapper .inner > div.sky.foreground .river .water:nth-child(2n),
+            #wrapper .inner > div.skyline.foreground .river .water:nth-child(2n),
+            #wrapper .inner > div.trees.foreground .river .water:nth-child(2n),
+            #wrapper .inner > div.foreground.foreground .river .water:nth-child(2n),
+            #wrapper .inner > div.foreground > .ground.foreground .river .water:nth-child(2n),
+            #wrapper .inner > div.foreground > .river.foreground .river .water:nth-child(2n),
+            #wrapper .inner > div.foreground > .river > .water.foreground .river .water:nth-child(2n) {
               bottom: 0;
               z-index: 15;
               left: -75px; }
-            #wrapper .inner div.foreground .river .water:nth-child(3n) {
+            #wrapper .inner > div.sky.foreground .river .water:nth-child(3n),
+            #wrapper .inner > div.skyline.foreground .river .water:nth-child(3n),
+            #wrapper .inner > div.trees.foreground .river .water:nth-child(3n),
+            #wrapper .inner > div.foreground.foreground .river .water:nth-child(3n),
+            #wrapper .inner > div.foreground > .ground.foreground .river .water:nth-child(3n),
+            #wrapper .inner > div.foreground > .river.foreground .river .water:nth-child(3n),
+            #wrapper .inner > div.foreground > .river > .water.foreground .river .water:nth-child(3n) {
               bottom: 20px;
               z-index: 14; }
-            #wrapper .inner div.foreground .river .water:nth-child(4n) {
+            #wrapper .inner > div.sky.foreground .river .water:nth-child(4n),
+            #wrapper .inner > div.skyline.foreground .river .water:nth-child(4n),
+            #wrapper .inner > div.trees.foreground .river .water:nth-child(4n),
+            #wrapper .inner > div.foreground.foreground .river .water:nth-child(4n),
+            #wrapper .inner > div.foreground > .ground.foreground .river .water:nth-child(4n),
+            #wrapper .inner > div.foreground > .river.foreground .river .water:nth-child(4n),
+            #wrapper .inner > div.foreground > .river > .water.foreground .river .water:nth-child(4n) {
               bottom: 40px;
               z-index: 13;
               left: -75px; }
-            #wrapper .inner div.foreground .river .water:nth-child(5n) {
+            #wrapper .inner > div.sky.foreground .river .water:nth-child(5n),
+            #wrapper .inner > div.skyline.foreground .river .water:nth-child(5n),
+            #wrapper .inner > div.trees.foreground .river .water:nth-child(5n),
+            #wrapper .inner > div.foreground.foreground .river .water:nth-child(5n),
+            #wrapper .inner > div.foreground > .ground.foreground .river .water:nth-child(5n),
+            #wrapper .inner > div.foreground > .river.foreground .river .water:nth-child(5n),
+            #wrapper .inner > div.foreground > .river > .water.foreground .river .water:nth-child(5n) {
               bottom: 60px;
               z-index: 12; }
-            #wrapper .inner div.foreground .river .water:nth-child(6n) {
+            #wrapper .inner > div.sky.foreground .river .water:nth-child(6n),
+            #wrapper .inner > div.skyline.foreground .river .water:nth-child(6n),
+            #wrapper .inner > div.trees.foreground .river .water:nth-child(6n),
+            #wrapper .inner > div.foreground.foreground .river .water:nth-child(6n),
+            #wrapper .inner > div.foreground > .ground.foreground .river .water:nth-child(6n),
+            #wrapper .inner > div.foreground > .river.foreground .river .water:nth-child(6n),
+            #wrapper .inner > div.foreground > .river > .water.foreground .river .water:nth-child(6n) {
               bottom: 80px;
               z-index: 11; }
-            #wrapper .inner div.foreground .river .water:nth-child(7n) {
+            #wrapper .inner > div.sky.foreground .river .water:nth-child(7n),
+            #wrapper .inner > div.skyline.foreground .river .water:nth-child(7n),
+            #wrapper .inner > div.trees.foreground .river .water:nth-child(7n),
+            #wrapper .inner > div.foreground.foreground .river .water:nth-child(7n),
+            #wrapper .inner > div.foreground > .ground.foreground .river .water:nth-child(7n),
+            #wrapper .inner > div.foreground > .river.foreground .river .water:nth-child(7n),
+            #wrapper .inner > div.foreground > .river > .water.foreground .river .water:nth-child(7n) {
               bottom: 100px;
               z-index: 10; }
     #wrapper .inner div.hotspots {
@@ -116,97 +207,110 @@ body {
         cursor: pointer;
         background-size: 100%;
         display: block;
-        position: absolute; }
+        position: absolute;
+        width: auto; }
 
 .alert {
   width: 100%;
   text-align: center;
   display: block;
-  height: 14px;
+  height: 34px;
   background: #328795;
   position: relative;
   z-index: 99;
-  padding: 8px 0;
+  padding: 7px 0 9px;
   font-size: 14px;
   font-weight: 700;
   color: #9cd4de;
-  transition: 0.5s all; }
+  transition: 0.5s all;
+  border: none;
+  border-radius: 0;
+  margin: 0; }
   .alert > .close {
     position: absolute;
     right: 0;
     top: 0;
     font-size: 18px;
-    padding: 7px 6px 5px;
-    color: #9cd4de; }
+    font-weight: 400;
+    padding: 7px 10px 8px;
+    color: #9cd4de;
+    text-shadow: none;
+    opacity: 1; }
     .alert > .close:hover {
       color: white; }
   .alert:hover {
     color: white; }
   .alert + .menu-link {
-    top: 50px; }
+    top: 34px; }
 
 @-moz-keyframes pulsing {
   0% {
-    box-shadow: 0 0 8px rgba(255, 255, 255, 0); }
+    box-shadow: 0 0 24px rgba(255, 255, 255, 0); }
   50% {
-    box-shadow: 0 0 8px rgba(255, 255, 255, 0.75); }
+    box-shadow: 0 0 24px white; }
   100% {
-    box-shadow: 0 0 8px rgba(255, 255, 255, 0); } }
+    box-shadow: 0 0 24px rgba(255, 255, 255, 0); } }
 @-webkit-keyframes pulsing {
   0% {
-    box-shadow: 0 0 8px rgba(255, 255, 255, 0); }
+    box-shadow: 0 0 24px rgba(255, 255, 255, 0); }
   50% {
-    box-shadow: 0 0 8px rgba(255, 255, 255, 0.75); }
+    box-shadow: 0 0 24px white; }
   100% {
-    box-shadow: 0 0 8px rgba(255, 255, 255, 0); } }
+    box-shadow: 0 0 24px rgba(255, 255, 255, 0); } }
 @keyframes pulsing {
   0% {
-    box-shadow: 0 0 8px rgba(255, 255, 255, 0); }
+    box-shadow: 0 0 24px rgba(255, 255, 255, 0); }
   50% {
-    box-shadow: 0 0 8px rgba(255, 255, 255, 0.75); }
+    box-shadow: 0 0 24px white; }
   100% {
-    box-shadow: 0 0 8px rgba(255, 255, 255, 0); } }
+    box-shadow: 0 0 24px rgba(255, 255, 255, 0); } }
 .hotspot-indicator {
-  width: 40px;
-  height: 40px;
+  width: 48px;
+  height: 48px;
   display: block;
   position: absolute;
   z-index: 20;
   left: 50%;
-  margin-left: -20px;
-  top: -40px;
+  margin-left: -24px;
+  top: -44px;
   cursor: pointer; }
   .hotspot-indicator > svg {
-    width: 40px;
-    height: 40px; }
-    .hotspot-indicator > svg #drop_x5F_front_1_,
-    .hotspot-indicator > svg #drop_x5F_mid_1_,
-    .hotspot-indicator > svg #drop_x5F_back_1_ {
-      -moz-animation: pulsing 4s linear infinite alternate;
-      -webkit-animation: pulsing 4s linear infinite alternate;
-      animation: pulsing 4s linear infinite alternate; }
+    width: 48px;
+    height: 48px; }
 
 .modal {
   display: block; }
-  .modal h2 {
-    font-size: 24px; }
-  .modal a {
-    display: block;
-    width: auto;
-    margin: 20px auto;
-    text-align: center;
-    font-weight: 700;
-    border: 2px solid #328795;
-    color: #328795;
-    padding: 6px 12px;
-    border-radius: 6px;
-    transition: 0.5s all; }
-    .modal a:hover {
-      border: 2px solid #25646f;
-      color: #25646f; }
-  .modal img {
-    margin: 20px 0;
-    max-width: 100%; }
+  .modal.in {
+    overflow-x: hidden;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch; }
+  .modal .modal-content {
+    border: none;
+    border-radius: 0;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.25);
+    -webkit-transform: translateZ(0); }
+    .modal .modal-content .modal-body {
+      padding: 30px; }
+      .modal .modal-content .modal-body h2 {
+        font-size: 27px;
+        margin: 0 0 15px; }
+      .modal .modal-content .modal-body a {
+        display: block;
+        width: auto;
+        margin: 20px auto;
+        text-align: center;
+        font-weight: 700;
+        border: 2px solid #328795;
+        color: #328795;
+        padding: 6px 12px;
+        border-radius: 6px;
+        transition: 0.5s all; }
+        .modal .modal-content .modal-body a:hover {
+          border: 2px solid #25646f;
+          color: #25646f; }
+      .modal .modal-content .modal-body img {
+        margin: 20px 0;
+        max-width: 100%; }
   .modal .close {
     top: 0;
     right: 0;
@@ -216,7 +320,10 @@ body {
     padding: 20px;
     color: #AAA;
     position: absolute;
-    cursor: pointer; }
+    cursor: pointer;
+    opacity: 0.5; }
+    .modal .close:hover {
+      opacity: 1; }
 
 .overlay {
   position: fixed;
@@ -231,35 +338,52 @@ body {
   .overlay.in {
     opacity: 0.35; }
 
+#welcome-modal {
+  margin-top: 60px; }
+  #welcome-modal .close-welcome {
+    cursor: pointer; }
+  #welcome-modal h2 {
+    margin-bottom: 25px;
+    text-align: center; }
+  #welcome-modal p {
+    font-size: 16px;
+    line-height: 1.6;
+    font-weight: 400; }
+  #welcome-modal + .overlay.in {
+    opacity: 0.65; }
+
 .panel {
   position: fixed;
   left: 0;
-  width: 320px;
+  width: 400px;
   z-index: 30;
-  -webkit-transform: translateX(-320px);
-  transform: translateX(-320px);
+  -webkit-transform: translateX(-400px);
+  transform: translateX(-400px);
   top: 0;
   bottom: 0;
+  margin: 0;
+  padding: 0;
+  border: none;
   background: white;
   background: rgba(255, 255, 255, 0.75);
   -webkit-transition: all 300ms ease;
   transition: all 300ms ease; }
   @media screen and (max-width: 767px) {
     .panel {
-      width: 400px;
-      -webkit-transform: translateX(-400px);
-      transform: translateX(-400px); } }
+      width: 100%;
+      -webkit-transform: translateX(-100%);
+      transform: translateX(-100%); } }
   .panel.active {
     -webkit-transform: translateX(0px);
     transform: translateX(0px); }
   .panel .panel-inner {
-    margin: 60px 0 0;
+    margin: 84px 0 0;
     list-style: none;
     padding: 0; }
     .panel .panel-inner > li.header {
       padding: 20px 22px 15px;
       color: #00447B;
-      font-size: 18px;
+      font-size: 21px;
       font-weight: 700;
       border-bottom: 1px solid rgba(255, 255, 255, 0.9); }
       @media screen and (max-width: 767px) {
@@ -272,12 +396,27 @@ body {
       text-decoration: none;
       border-bottom: 1px solid white;
       font-size: 16px;
+      font-weight: 400;
       background: rgba(255, 255, 255, 0); }
       .panel .panel-inner > li a:hover {
-        background: rgba(255, 255, 255, 0.5); }
+        background: rgba(255, 255, 255, 0.85); }
+      .panel .panel-inner > li a:after {
+        content: '\00BB';
+        margin-left: 8px; }
       @media screen and (max-width: 767px) {
         .panel .panel-inner > li a {
           font-size: 18px; } }
+  .panel .credits {
+    padding: 22px;
+    font-size: 11px;
+    position: absolute;
+    bottom: 0;
+    width: 100%; }
+    .panel .credits hr {
+      width: 25%;
+      border: none;
+      border-bottom: 4px solid #FFF;
+      margin: 15px 0; }
 
 .menu-link {
   position: fixed;
@@ -292,7 +431,7 @@ body {
   padding: 20px;
   cursor: pointer; }
   .menu-link path {
-    fill: #255C8C;
+    fill: #3077b4;
     transition: 0.5s fill; }
   .menu-link:hover path {
     fill: #1a4164; }
