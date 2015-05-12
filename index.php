@@ -27,7 +27,7 @@
 <head>
     <meta charset="<?php bloginfo('charset'); ?>">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <meta name="title" content="<?php wp_title( '|', true, 'right' ); ?>">
     <meta name="copyright" content="Copyright &copy; <?php bloginfo('name'); ?> <?php echo date('Y'); ?>. All Rights Reserved.">
 
@@ -149,10 +149,10 @@
         }
 
         function closeModal() {
-            $('.modal-container').removeClass('in');
+            $('.modal').removeClass('in');
             $('.overlay').removeClass('in');
             setTimeout(function(){ 
-                $('.modal-container').remove(); 
+                $('.modal').remove(); 
                 $('.overlay').remove(); 
             }, 550);
         }
@@ -170,9 +170,9 @@
             var link = $(this).attr('data-modal-link');
             var image = $(this).attr('data-modal-image');
 
-            var html =  '<div class="modal-container">' +
-                        '    <div class="modal">' + 
-                        '        <div class="modal-inner">' +
+            var html =  '<div class="modal fade" tabindex="-1" role="dialog">' +
+                        '    <div class="modal-dialog">' + 
+                        '        <div class="modal-content"><div class="modal-body">' +
                         '            <div class="close">&times;</div>' +
                         '            <h2>' + title + '</h2>' +
                         '            <p>' + content + '</p>';
@@ -183,14 +183,14 @@
             if (link){  
                 html += '            <a href="' + link + '" target="_blank">Learn More &raquo;</a>'; 
             }
-                html += '        </div>' +
+                html += '        </div></div>' +
                         '    </div>' +
                         '</div>' +
                         '<div class="overlay"></div>';
 
             $('body').append(html);
             setTimeout(function(){ 
-                $('.modal-container').addClass('in'); 
+                $('.modal').addClass('in');
                 $('.overlay').addClass('in');
             }, 100);
             //return false;
@@ -203,11 +203,11 @@
 
             $(document).on('click', '.hotspot', createHotspot);
 
-            $(document).on('click', '.modal-container', function(){
+            $(document).on('click', '.modal', function(){
                 closeModal();
             });
 
-            $(document).on('click', '.modal', function(e){
+            $(document).on('click', '.modal-dialog', function(e){
                 e.stopPropagation();
             });
             

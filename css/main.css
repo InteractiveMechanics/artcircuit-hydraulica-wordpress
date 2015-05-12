@@ -145,60 +145,27 @@ body {
   .alert + .menu-link {
     top: 50px; }
 
-@-webkit-keyframes colorShiftBack {
+@-moz-keyframes pulsing {
   0% {
-    fill: #498DC1; }
-  25% {
-    fill: #255C8C; }
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0); }
   50% {
-    fill: #002A57; }
-  75% {
-    fill: #498DC1; } }
-@keyframes colorShiftBack {
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.75); }
+  100% {
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0); } }
+@-webkit-keyframes pulsing {
   0% {
-    fill: #498DC1; }
-  25% {
-    fill: #255C8C; }
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0); }
   50% {
-    fill: #002A57; }
-  75% {
-    fill: #498DC1; } }
-@-webkit-keyframes colorShiftFront {
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.75); }
+  100% {
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0); } }
+@keyframes pulsing {
   0% {
-    fill: #002A57; }
-  25% {
-    fill: #498DC1; }
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0); }
   50% {
-    fill: #255C8C; }
-  75% {
-    fill: #002A57; } }
-@keyframes colorShiftFront {
-  0% {
-    fill: #002A57; }
-  25% {
-    fill: #498DC1; }
-  50% {
-    fill: #255C8C; }
-  75% {
-    fill: #002A57; } }
-@-webkit-keyframes colorShiftMid {
-  0% {
-    fill: #255C8C; }
-  25% {
-    fill: #002A57; }
-  50% {
-    fill: #498DC1; }
-  75% {
-    fill: #255C8C; } }
-@keyframes colorShiftMid {
-  0% {
-    fill: #255C8C; }
-  25% {
-    fill: #002A57; }
-  50% {
-    fill: #498DC1; }
-  75% {
-    fill: #255C8C; } }
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.75); }
+  100% {
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0); } }
 .hotspot-indicator {
   width: 40px;
   height: 40px;
@@ -212,91 +179,35 @@ body {
   .hotspot-indicator > svg {
     width: 40px;
     height: 40px; }
+    .hotspot-indicator > svg #drop_x5F_front_1_,
+    .hotspot-indicator > svg #drop_x5F_mid_1_,
+    .hotspot-indicator > svg #drop_x5F_back_1_ {
+      -moz-animation: pulsing 4s linear infinite alternate;
+      -webkit-animation: pulsing 4s linear infinite alternate;
+      animation: pulsing 4s linear infinite alternate; }
 
-.hotspot:hover #drop_x5F_back_1_ {
-  -o-animation: colorShiftBack 2s linear infinite normal both;
-  -moz-animation: colorShiftBack 2s linear infinite normal both;
-  -webkit-animation: colorShiftBack 2s linear infinite normal both;
-  animation: colorShiftBack 2s linear infinite normal both; }
-.hotspot:hover #drop_x5F_mid_1_ {
-  -o-animation: colorShiftMid 2s linear infinite normal both;
-  -moz-animation: colorShiftMid 2s linear infinite normal both;
-  -webkit-animation: colorShiftMid 2s linear infinite normal both;
-  animation: colorShiftMid 2s linear infinite normal both; }
-.hotspot:hover #drop_x5F_front_2_ {
-  -o-animation: colorShiftFront 2s linear infinite normal both;
-  -moz-animation: colorShiftFront 2s linear infinite normal both;
-  -webkit-animation: colorShiftFront 2s linear infinite normal both;
-  animation: colorShiftFront 2s linear infinite normal both; }
-
-.modal-container {
-  z-index: 999;
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  opacity: 0;
-  transition: 0.5s opacity;
-  overflow: hidden;
-  -webkit-transform: translateZ(0);
-  transform: translateZ(0);
+.modal {
   display: block; }
-  .modal-container.in {
-    opacity: 1;
-    overflow-x: hidden;
-    overflow-y: scroll; }
-    .modal-container.in .modal {
-      -webkit-transform: translate(0, 0);
-      -ms-transform: translate(0, 0);
-      -o-transform: translate(0, 0);
-      transform: translate(0, 0); }
-  .modal-container .modal {
+  .modal h2 {
+    font-size: 24px; }
+  .modal a {
+    display: block;
     width: auto;
-    max-width: 650px;
-    background: white;
-    background: rgba(255, 255, 255, 0.85);
-    margin: 60px auto;
-    position: relative;
-    z-index: 1000;
-    line-height: 1.6;
-    overflow: auto;
-    -webkit-transition: -webkit-transform .3s ease-out;
-    -o-transition: -o-transform .3s ease-out;
-    transition: transform .3s ease-out;
-    -webkit-transform: translate(0, -25%);
-    -ms-transform: translate(0, -25%);
-    -o-transform: translate(0, -25%);
-    transform: translate(0, -25%); }
-    @media screen and (max-width: 767px) {
-      .modal-container .modal {
-        margin: 0 auto;
-        max-width: 100%; } }
-    .modal-container .modal h2 {
-      font-size: 24px; }
-    .modal-container .modal a {
-      display: block;
-      width: auto;
-      margin: 20px auto;
-      text-align: center;
-      font-weight: 700;
-      border: 2px solid #328795;
-      color: #328795;
-      padding: 6px 12px;
-      border-radius: 6px;
-      transition: 0.5s all; }
-      .modal-container .modal a:hover {
-        border: 2px solid #25646f;
-        color: #25646f; }
-    .modal-container .modal img {
-      margin: 20px 0;
-      max-width: 100%; }
-    .modal-container .modal .modal-inner {
-      padding: 30px;
-      position: relative;
-      -webkit-background-clip: padding-box;
-      background-clip: padding-box; }
-  .modal-container .close {
+    margin: 20px auto;
+    text-align: center;
+    font-weight: 700;
+    border: 2px solid #328795;
+    color: #328795;
+    padding: 6px 12px;
+    border-radius: 6px;
+    transition: 0.5s all; }
+    .modal a:hover {
+      border: 2px solid #25646f;
+      color: #25646f; }
+  .modal img {
+    margin: 20px 0;
+    max-width: 100%; }
+  .modal .close {
     top: 0;
     right: 0;
     font-size: 24px;
@@ -342,7 +253,9 @@ body {
     -webkit-transform: translateX(0px);
     transform: translateX(0px); }
   .panel .panel-inner {
-    margin-top: 60px; }
+    margin: 60px 0 0;
+    list-style: none;
+    padding: 0; }
     .panel .panel-inner > li.header {
       padding: 20px 22px 15px;
       color: #00447B;

@@ -7,5 +7,5 @@ Author URI: http://www.interactivemechanics.com
 Version: 1.0
 */
 
-@import url('css/screen.css');
+@import url('css/vendor/bootstrap.min.css');
 @import url('css/main.css');

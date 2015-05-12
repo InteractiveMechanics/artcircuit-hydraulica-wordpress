@@ -1,87 +1,31 @@
-.modal-container {
-    z-index: 999;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    opacity: 0;
-    transition: 0.5s opacity;
-    overflow: hidden;
-    -webkit-transform: translateZ(0);
-    transform: translateZ(0);
+.modal {
     display: block;
 
-    &.in {
-        opacity: 1;
-        overflow-x: hidden;
-        overflow-y: scroll;
-
-        .modal {
-            -webkit-transform: translate(0,0);
-            -ms-transform: translate(0,0);
-            -o-transform: translate(0,0);
-            transform: translate(0,0);
-        }
+    h2 {
+        font-size: 24px;
     }
-
-    .modal {
+    a {
+        display: block;
         width: auto;
-        max-width: 650px;
-        background: white;
-        background: rgba(255,255,255,0.85);
-        margin: 60px auto;
-        position: relative;
-        z-index: 1000;
-        line-height: 1.6;
-        overflow: auto;
+        margin: 20px auto;
+        text-align: center;
+        font-weight: 700;
+        border: 2px solid #328795;
+        color: #328795;
+        padding: 6px 12px;
+        border-radius: 6px;
+        transition: 0.5s all;
 
-        -webkit-transition: -webkit-transform .3s ease-out;
-        -o-transition: -o-transform .3s ease-out;
-        transition: transform .3s ease-out;
-
-        -webkit-transform: translate(0,-25%);
-        -ms-transform: translate(0,-25%);
-        -o-transform: translate(0,-25%);
-        transform: translate(0,-25%);
-
-        @media screen and #{$screen-xs} {
-            margin: 0 auto;
-            max-width: 100%;
-        }
-
-        h2 {
-            font-size: 24px;
-        }
-        a {
-            display: block;
-            width: auto;
-            margin: 20px auto;
-            text-align: center;
-            font-weight: 700;
-            border: 2px solid #328795;
-            color: #328795;
-            padding: 6px 12px;
-            border-radius: 6px;
-            transition: 0.5s all;
-
-            &:hover { 
-                border: 2px solid darken(#328795, 10%);
-                color: darken(#328795, 10%);
-            }
-        }
-        img {
-            margin: 20px 0;
-            max-width: 100%;
-        }
-
-        .modal-inner {
-            padding: 30px;
-            position: relative;
-            -webkit-background-clip: padding-box;
-            background-clip: padding-box;
+        &:hover { 
+            border: 2px solid darken(#328795, 10%);
+            color: darken(#328795, 10%);
         }
     }
+    img {
+        margin: 20px 0;
+        max-width: 100%;
+    }
+
     .close {
         top: 0;
         right: 0;
@@ -94,6 +38,7 @@
         cursor: pointer;
     }
 }
+
 .overlay {
     position: fixed;
     top: 0;

@@ -1,36 +1,18 @@
-@mixin generateColorShift($name, $color1, $color2, $color3){
-    @-webkit-keyframes colorShift#{$name} {
-        0% {
-            fill: $color1;
-        }
-        25% {
-            fill: $color2;
-        }
-        50% {
-            fill: $color3;
-        }
-        75% {
-            fill: $color1;
-        }
-    }
-    @keyframes colorShift#{$name} {
-        0% {
-            fill: $color1;
-        }
-        25% {
-            fill: $color2;
-        }
-        50% {
-            fill: $color3;
-        }
-        75% {
-            fill: $color1;
-        }
-    }
+@-moz-keyframes pulsing {
+    0%   { box-shadow: 0 0 8px rgba(255,255,255, 0); }
+    50%  { box-shadow: 0 0 8px rgba(255,255,255, 0.75); }
+    100% { box-shadow: 0 0 8px rgba(255,255,255, 0); }
 }
-@include generateColorShift(Back, #498DC1, #255C8C, #002A57);
-@include generateColorShift(Front, #002A57, #498DC1, #255C8C);
-@include generateColorShift(Mid, #255C8C, #002A57, #498DC1);
+@-webkit-keyframes pulsing {
+    0%   { box-shadow: 0 0 8px rgba(255,255,255, 0); }
+    50%  { box-shadow: 0 0 8px rgba(255,255,255, 0.75); }
+    100% { box-shadow: 0 0 8px rgba(255,255,255, 0); }
+}
+@keyframes pulsing {
+    0%   { box-shadow: 0 0 8px rgba(255,255,255, 0); }
+    50%  { box-shadow: 0 0 8px rgba(255,255,255, 0.75); }
+    100% { box-shadow: 0 0 8px rgba(255,255,255, 0); }
+}
 
 .hotspot-indicator {
     width: 40px;
@@ -46,26 +28,13 @@
     > svg { 
         width: 40px; 
         height: 40px;
-    }
-}
 
-.hotspot:hover {
-    #drop_x5F_back_1_ {
-        -o-animation: colorShiftBack 2s linear infinite normal both;
-        -moz-animation: colorShiftBack 2s linear infinite normal both;
-        -webkit-animation: colorShiftBack 2s linear infinite normal both;
-        animation: colorShiftBack 2s linear infinite normal both;
-    }
-    #drop_x5F_mid_1_ {
-        -o-animation: colorShiftMid 2s linear infinite normal both;
-        -moz-animation: colorShiftMid 2s linear infinite normal both;
-        -webkit-animation: colorShiftMid 2s linear infinite normal both;
-        animation: colorShiftMid 2s linear infinite normal both;
-    }
-    #drop_x5F_front_2_ {
-        -o-animation: colorShiftFront 2s linear infinite normal both;
-        -moz-animation: colorShiftFront 2s linear infinite normal both;
-        -webkit-animation: colorShiftFront 2s linear infinite normal both;
-        animation: colorShiftFront 2s linear infinite normal both;
+        #drop_x5F_front_1_,
+        #drop_x5F_mid_1_,
+        #drop_x5F_back_1_ {
+            -moz-animation: pulsing 4s linear infinite alternate;
+            -webkit-animation: pulsing 4s linear infinite alternate;
+            animation: pulsing 4s linear infinite alternate;
+        }
     }
 }
