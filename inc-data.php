@@ -16,6 +16,10 @@ var data =
                 <?php if (get_field('left')): ?>"left": "<?php the_field('left'); ?>px",<?php endif; ?>
                 <?php if (get_field('z-index')): ?>"zindex": "<?php the_field('z-index'); ?>"<?php endif; ?>
             },
+            "icon": {
+                <?php if (get_field('top')): ?>"top": "<?php the_field('top'); ?>px",<?php endif; ?>
+                <?php if (get_field('margin-left')): ?>"marginleft": "<?php the_field('margin-left'); ?>px",<?php endif; ?>
+            },
             "size": {
                 <?php if (get_field('width')): ?>"width": "<?php the_field('width'); ?>px",<?php endif; ?>
                 <?php if (get_field('height')): ?>"height": "<?php the_field('height'); ?>px"<?php endif; ?>

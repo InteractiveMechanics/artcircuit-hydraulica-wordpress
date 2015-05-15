@@ -1,11 +1,6 @@
 .modal {
     display: block;
-
-    &.in {
-        overflow-x: hidden;
-        overflow-y: auto;
-        -webkit-overflow-scrolling: touch
-    }
+    overflow: auto;
 
     .modal-content {
         border: none;

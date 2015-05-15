@@ -46,84 +46,11 @@
     <link rel="apple-touch-icon" sizes="180x180" href="<?php echo get_template_directory_uri(); ?>/images/icons/apple-touch-icon-180x180.png" />
 	<link rel="icon" type="image/png" href="<?php echo get_template_directory_uri(); ?>/images/icons/64_favicon.png" sizes="64x64" />
 	<link rel="icon" type="image/png" href="<?php echo get_template_directory_uri(); ?>/images/icons/32_favicon.png" sizes="32x32" />
-    <?php wp_head(); ?>
-</head>
-<body>
-    <a class="menu-link">
-        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" height="32px" id="Layer_1" style="enable-background:new 0 0 32 32;" version="1.1" viewBox="0 0 32 32" width="32px" xml:space="preserve">
-            <path d="M4,10h24c1.104,0,2-0.896,2-2s-0.896-2-2-2H4C2.896,6,2,6.896,2,8S2.896,10,4,10z M28,14H4c-1.104,0-2,0.896-2,2  s0.896,2,2,2h24c1.104,0,2-0.896,2-2S29.104,14,28,14z M28,22H4c-1.104,0-2,0.896-2,2s0.896,2,2,2h24c1.104,0,2-0.896,2-2 S29.104,22,28,22z"/>
-        </svg>
-    </a>
-    <div id="wrapper">
-        <div class="inner">
-            <div class="sky"></div>
-            <div class="skyline"></div>
-            <div class="trees"></div>
-            <div class="foreground">
-                <div class="ground"></div>
-                <div class="river">
-                    <div class="water"></div>
-                    <div class="water"></div>
-                    <div class="water"></div>
-                    <div class="water"></div>
-                    <div class="water"></div>
-                    <div class="water"></div>
-                    <div class="water"></div>
-                </div>
-            </div>
-            <div class="hotspots"></div>
-        </div>
-    </div>
-
-    <?php $post_array = get_pages('pagename = settings'); ?>
-    <?php foreach ( $post_array as $post ) : setup_postdata( $post ); ?>
-        <nav id="menu" class="panel" role="navigation">
-            <ul class="panel-inner">
-                <li class="header">Art on the Circuit</li>
-                <?php wp_nav_menu( 
-                    array(
-                        'menu'          => 'Sidebar Menu',
-                        'items_wrap'    => '%3$s',
-                        'container'     => ''
-                )); ?>
-            </ul>
-            <div class="credits">
-                Copyright &copy; <?php echo date('Y'); ?> Art on the Circuit.
-                <div class="hidden-xs">
-                    <hr>
-                    <?php the_field('credits'); ?>
-                </div>
-            </div>
-        </nav>
-
-        <?php if(get_field('show_alert')): ?>
-            <a class="alert" target="_blank" href="<?php the_field('alert_link'); ?>">
-                <?php the_field('alert_text'); ?>
-                <span class="close">&times;</span>
-            </a>
-        <?php endif; ?>
-
-        <?php if(get_field('show_welcome_modal')): ?>
-            <div id="welcome-modal" class="modal fade in" tabindex="-1" role="dialog">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-body">
-                            <h2><?php the_field('welcome_modal_title'); ?></h2>
-                            <p><?php the_field('welcome_modal_body'); ?></p>
-                            <a class="close-welcome"><?php the_field('welcome_modal_link_text'); ?> &raquo;</a>
-                            <?php if(get_field('show_alert_in_welcome')): ?>
-                                <a target="_blank" href="<?php the_field('alert_link'); ?>">Give us your feedback &raquo;</a>
-                            <?php endif; ?>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="overlay in"></div>
-        <?php endif; ?>
-    <?php endforeach; wp_reset_postdata(); ?>
 
     <script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
-    <script src="<?php bloginfo('template_directory'); ?>/js/vendor/jquery.pep.js"></script>
+    <script src="<?php bloginfo('template_directory'); ?>/js/vendor/jquery-ui-1.10.3.custom.min.js"></script>
+    <script src="<?php bloginfo('template_directory'); ?>/js/vendor/jquery.kinetic.min.js"></script>
+    <script src="<?php bloginfo('template_directory'); ?>/js/vendor/jquery.smoothTouchScroll.min.js"></script>
     <script src="<?php bloginfo('template_directory'); ?>/js/vendor/jquery.cookie.js"></script>
     
     <?php include_once('inc-data.php'); ?>
@@ -142,7 +69,10 @@
                             '     data-modal-title="' + val.modal.title + '" ' +
                             '     data-modal-image="' + val.modal.image + '" ' +
                             '     data-modal-link="' + link + '">' +
-                            '     <div class="hotspot-indicator"><?php echo file_get_contents( get_template_directory_uri() . '/images/icon_drops.svg'); ?></div>' +
+                            '     <div class="hotspot-indicator"' +
+                            '     style="top:' + val.icon.top + '; ' +
+                                        'margin-left:' + val.icon.marginleft + ';"' +
+                            '     ><?php echo file_get_contents( get_template_directory_uri() . '/images/icon_drops.svg'); ?></div>' +
                             '</a>';
                 
                 $('.hotspots').append(html);
@@ -153,6 +83,7 @@
             var windowWidth = $(window).width();
             var $wrapper = $('#wrapper .inner');
 
+            /*
             var constrainArray = function () {
                 var wDiff = $wrapper.width() - $(window).width();
                 var hDiff = $wrapper.height() - $(window).height();
@@ -171,6 +102,11 @@
                     top: null
                 },
                 elementsWithInteraction: '.hotspot'
+            });
+            */
+
+            $('#wrapper').smoothTouchScroll({
+                scrollableAreaClass: "inner"
             });
         }
 
@@ -221,17 +157,10 @@
         }
 
         function createEvents() {
-            $(document).on('touchmove', function(e) {
-                if( $(e.target).hasClass('modal') || $(e.target).closest('.modal').length ){
-                    return;
-                }
-                e.preventDefault();
-            });
-
             $(window).resize(unfuckModals);
 
             $(document).on('click', '.hotspot', createHotspot);
-            $(document).on('touchstart click', '.menu-link', togglePanel);
+            $(document).on('tap click', '.menu-link', togglePanel);
 
             $(document).on('touchstart click', '.modal', function(){
                 closeModal();
@@ -263,12 +192,14 @@
         }
 
         function staggerHighlights() {
-            $('.hotspot-indicator svg').each(function() {
+            $('.hotspot-indicator').each(function() {
                 var random = Math.floor((Math.random() * 5) + 1);
 
-                $(this).css('-moz-animation-delay', random + 's');
-                $(this).css('-webkit-animation-delay', random + 's');
-                $(this).css('animation-delay', random + 's');
+                $(this).find('.glow').css({
+                    '-moz-animation-delay': random + 's',
+                    '-webkit-animation-delay': random + 's',
+                    'animation-delay': random + 's'
+                });
             });
         }
 
@@ -283,6 +214,7 @@
             setDraggable();
             createEvents();
             unfuckModals();
+            staggerHighlights();
             
             if ($.cookie('alert') == 'hidden'){ 
                 $('.alert').remove(); }
@@ -291,6 +223,85 @@
                 $('.overlay').remove(); }
         });
     </script>
+
+    <?php wp_head(); ?>
+</head>
+<body>
+    <?php $post_array = get_pages('pagename = settings'); ?>
+    <?php foreach ( $post_array as $post ) : setup_postdata( $post ); ?>
+        <?php if(get_field('show_alert')): ?>
+            <a class="alert" target="_blank" href="<?php the_field('alert_link'); ?>">
+                <?php the_field('alert_text'); ?>
+                <span class="close">&times;</span>
+            </a>
+        <?php endif; ?>
+    <?php endforeach; ?>
+
+    <a class="menu-link">
+        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" height="32px" id="Layer_1" style="enable-background:new 0 0 32 32;" version="1.1" viewBox="0 0 32 32" width="32px" xml:space="preserve">
+            <path d="M4,10h24c1.104,0,2-0.896,2-2s-0.896-2-2-2H4C2.896,6,2,6.896,2,8S2.896,10,4,10z M28,14H4c-1.104,0-2,0.896-2,2  s0.896,2,2,2h24c1.104,0,2-0.896,2-2S29.104,14,28,14z M28,22H4c-1.104,0-2,0.896-2,2s0.896,2,2,2h24c1.104,0,2-0.896,2-2 S29.104,22,28,22z"/>
+        </svg>
+    </a>
+    <div id="wrapper" class="wrapper">
+        <div class="inner">
+            <div class="sky"></div>
+            <div class="skyline"></div>
+            <div class="trees"></div>
+            <div class="foreground">
+                <div class="ground"></div>
+                <div class="river">
+                    <div class="water"></div>
+                    <div class="water"></div>
+                    <div class="water"></div>
+                    <div class="water"></div>
+                    <div class="water"></div>
+                    <div class="water"></div>
+                    <div class="water"></div>
+                </div>
+            </div>
+            <div class="hotspots"></div>
+        </div>
+    </div>
+
+    
+    <?php foreach ( $post_array as $post ) : setup_postdata( $post ); ?>
+        <nav id="menu" class="panel" role="navigation">
+            <ul class="panel-inner">
+                <li class="header">Art on the Circuit</li>
+                <?php wp_nav_menu( 
+                    array(
+                        'menu'          => 'Sidebar Menu',
+                        'items_wrap'    => '%3$s',
+                        'container'     => ''
+                )); ?>
+            </ul>
+            <div class="credits">
+                Copyright &copy; <?php echo date('Y'); ?> Art on the Circuit.
+                <div class="hidden-xs">
+                    <hr>
+                    <?php the_field('credits'); ?>
+                </div>
+            </div>
+        </nav>
+
+        <?php if(get_field('show_welcome_modal')): ?>
+            <div id="welcome-modal" class="modal fade in" tabindex="-1" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-body">
+                            <h2><?php the_field('welcome_modal_title'); ?></h2>
+                            <p><?php the_field('welcome_modal_body'); ?></p>
+                            <a class="close-welcome"><?php the_field('welcome_modal_link_text'); ?> &raquo;</a>
+                            <?php if(get_field('show_alert_in_welcome')): ?>
+                                <a target="_blank" href="<?php the_field('alert_link'); ?>">Give us your feedback &raquo;</a>
+                            <?php endif; ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="overlay in"></div>
+        <?php endif; ?>
+    <?php endforeach; wp_reset_postdata(); ?>
 
     <?php wp_footer(); ?>
 </body>
