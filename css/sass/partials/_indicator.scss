@@ -1,5 +1,10 @@
 $blur: 24px;
 
+@-o-keyframes pulsing {
+    0%   { opacity: 0; }
+    50%  { opacity: 1; }
+    100% { opacity: 0; }
+}
 @-moz-keyframes pulsing {
     0%   { opacity: 0; }
     50%  { opacity: 1; }
@@ -35,6 +40,7 @@ $blur: 24px;
             opacity: 0;
             -webkit-animation: pulsing 5s linear 0s infinite;
             animation: pulsing 5s linear 0s infinite;
+            -o-animation: none;
             -moz-animation: none;
         }
     }

@@ -248,6 +248,13 @@ body {
   .alert + .menu-link {
     top: 34px; }
 
+@-o-keyframes pulsing {
+  0% {
+    opacity: 0; }
+  50% {
+    opacity: 1; }
+  100% {
+    opacity: 0; } }
 @-moz-keyframes pulsing {
   0% {
     opacity: 0; }
@@ -286,6 +293,7 @@ body {
       opacity: 0;
       -webkit-animation: pulsing 5s linear 0s infinite;
       animation: pulsing 5s linear 0s infinite;
+      -o-animation: none;
       -moz-animation: none; }
 
 .modal {
@@ -315,6 +323,10 @@ body {
         .modal .modal-content .modal-body a:hover {
           border: 2px solid #25646f;
           color: #25646f; }
+      .modal .modal-content .modal-body figcaption {
+        font-style: italic;
+        margin-top: 5px;
+        color: gray; }
       .modal .modal-content .modal-body img {
         margin: 20px 0;
         max-width: 100%; }

@@ -66,9 +66,14 @@
                                         'z-index:' + val.position.zindex + '; ' +
                                         'background-image: url(' + val.image + ');" ' +
                             '     data-modal-content="' + val.modal.description + '" ' +
-                            '     data-modal-title="' + val.modal.title + '" ' +
-                            '     data-modal-image="' + val.modal.image + '" ' +
-                            '     data-modal-link="' + link + '">' +
+                            '     data-modal-title="' + val.modal.title + '" ';
+                if (val.modal.image){ 
+                    html += '     data-modal-image="' + val.modal.image + '" ';
+                }
+                if (val.modal.caption){ 
+                    html += '     data-modal-caption="' + val.modal.caption + '"';
+                }
+                    html += '     data-modal-link="' + link + '">' +
                             '     <div class="hotspot-indicator"' +
                             '     style="top:' + val.icon.top + '; ' +
                                         'margin-left:' + val.icon.marginleft + ';"' +
@@ -82,28 +87,6 @@
         function setDraggable() {
             var windowWidth = $(window).width();
             var $wrapper = $('#wrapper .inner');
-
-            /*
-            var constrainArray = function () {
-                var wDiff = $wrapper.width() - $(window).width();
-                var hDiff = $wrapper.height() - $(window).height();
-                return [
-                    -hDiff,
-                    0,
-                    0,
-                    -wDiff
-                ];
-            };
-            var $pep = $wrapper.pep({
-                constrainTo: constrainArray(),
-                axis: 'x',
-                startPos: {
-                    left: -(($wrapper.width()/2) - (windowWidth/2)),
-                    top: null
-                },
-                elementsWithInteraction: '.hotspot'
-            });
-            */
 
             $('#wrapper').smoothTouchScroll({
                 scrollableAreaClass: "inner"
@@ -129,6 +112,7 @@
             var content = $(this).attr('data-modal-content');
             var link = $(this).attr('data-modal-link');
             var image = $(this).attr('data-modal-image');
+            var caption = $(this).attr('data-modal-caption');
 
             var html =  '<div class="modal fade" tabindex="-1" role="dialog">' +
                         '    <div class="modal-dialog">' + 
@@ -137,8 +121,11 @@
                         '            <h2>' + title + '</h2>' +
                         '            <p>' + content + '</p>';
 
-            if (image != 'undefined'){ 
+            if (image){ 
                 html += '            <img src="' + image + '" alt="' + title + '" />'; 
+            }
+            if (caption){ 
+                html += '            <figcaption>' + caption + '</figcaption>'; 
             }
             if (link){  
                 html += '            <a href="' + link + '" target="_blank">Learn More &raquo;</a>'; 
@@ -196,6 +183,7 @@
                 var random = Math.floor((Math.random() * 5) + 1);
 
                 $(this).find('.glow').css({
+                    '-o-animation-delay': random + 's',
                     '-moz-animation-delay': random + 's',
                     '-webkit-animation-delay': random + 's',
                     'animation-delay': random + 's'
