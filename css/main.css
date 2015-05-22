@@ -357,19 +357,38 @@ body {
   .overlay.in {
     opacity: 0.35; }
 
-#welcome-modal {
-  margin-top: 60px; }
-  #welcome-modal .close-welcome {
-    cursor: pointer; }
-  #welcome-modal h2 {
-    margin-bottom: 25px;
-    text-align: center; }
-  #welcome-modal p {
-    font-size: 16px;
-    line-height: 1.6;
-    font-weight: 400; }
-  #welcome-modal + .overlay.in {
-    opacity: 0.65; }
+#welcome-modal .close-welcome {
+  cursor: pointer; }
+#welcome-modal h2 {
+  margin-bottom: 25px;
+  text-align: center; }
+#welcome-modal p {
+  font-size: 16px;
+  line-height: 1.6;
+  font-weight: 400; }
+#welcome-modal + .overlay.in {
+  opacity: 0.65; }
+
+#not-available-modal {
+  display: none; }
+  .bad-browser #not-available-modal, .no-svg #not-available-modal, .no-js #not-available-modal {
+    display: block;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    background: rgba(255, 255, 255, 0.95);
+    z-index: 9999; }
+  #not-available-modal h1 {
+    max-width: 660px;
+    margin: 60px auto 20px; }
+  #not-available-modal h3 {
+    max-width: 660px;
+    margin: 0 auto;
+    font-size: 18px;
+    line-height: 1.6; }
 
 .panel {
   position: fixed;

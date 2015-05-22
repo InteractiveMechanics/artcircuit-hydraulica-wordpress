@@ -28,7 +28,7 @@ var data =
                 <?php if (get_the_title()): ?>"title": <?php print json_encode($post->post_title); ?>,<?php endif; ?>
                 <?php if (get_the_content()): ?>"description": <?php print json_encode($post->post_content); ?>,<?php endif; ?>
                 <?php if (get_field('content_image')): ?>"image": "<?php the_field('content_image'); ?>",<?php endif; ?>
-                <?php if (get_field('content_caption')): ?>"caption": "<?php the_field('content_caption'); ?>",<?php endif; ?>
+                <?php if (get_field('content_caption')): ?>"caption": <?php print json_encode(get_field('content_caption')); ?>,<?php endif; ?>
                 <?php if (get_field('link')): ?>"link": "<?php the_field('link'); ?>"<?php endif; ?>
             }
         }<?php if($count < $the_query->found_posts){ echo ','; } $count++; ?>

@@ -1,29 +1,62 @@
-<?php 
-    function detectmobile(){
-        $agent = $_SERVER['HTTP_USER_AGENT'];
-        $useragents = array (
-            "iPhone",
-            "iPod",
-            "Android",
-            "blackberry9500",
-            "blackberry9530",
-            "blackberry9520",
-            "blackberry9550",
-            "blackberry9800",
-            "webOS",
-            "iPad"
-            );
-            $result = false;
-        foreach ( $useragents as $useragent ) {
-        if (preg_match("/".$useragent."/i",$agent)){
-                $result = true;
+<?php
+    function getBrowser() { 
+        $u_agent    = $_SERVER['HTTP_USER_AGENT']; 
+        $bname      = 'Unknown';
+        $version    = "";
+     
+        if(preg_match('/MSIE/i',$u_agent) && !preg_match('/Opera/i',$u_agent)) { 
+            $bname = 'Internet Explorer'; 
+            $ub = "MSIE"; 
+        } elseif(preg_match('/Firefox/i',$u_agent)) { 
+            $bname = 'Mozilla Firefox'; 
+            $ub = "Firefox"; 
+        } elseif(preg_match('/Chrome/i',$u_agent)) { 
+            $bname = 'Google Chrome'; 
+            $ub = "Chrome"; 
+        } elseif(preg_match('/Safari/i',$u_agent)) { 
+            $bname = 'Apple Safari'; 
+            $ub = "Safari"; 
+        } elseif(preg_match('/Opera/i',$u_agent)) { 
+            $bname = 'Opera'; 
+            $ub = "Opera"; 
+        } elseif(preg_match('/Netscape/i',$u_agent)) { 
+            $bname = 'Netscape'; 
+            $ub = "Netscape"; 
+        } 
+        
+        $known = array('Version', $ub, 'other');
+        $pattern = '#(?<browser>' . join('|', $known) . ')[/ ]+(?<version>[0-9.|a-zA-Z.]*)#';
+        if (!preg_match_all($pattern, $u_agent, $matches)) {}
+        
+        $i = count($matches['browser']);
+        if ($i != 1) {
+            if (strripos($u_agent,"Version") < strripos($u_agent, $ub)) {
+                $version = $matches['version'][0];
+            } else {
+                $version = $matches['version'][1];
             }
+        } else {
+            $version = $matches['version'][0];
         }
-        return $result;
+        
+        return array(
+            'userAgent' => $u_agent,
+            'name'      => $bname,
+            'version'   => $version
+        );
     }
+    $result = false;
+    $ua = getBrowser();
+
+    if ($ua['name'] == 'Internet Explorer' && $ua['version'] < 9){ $result = true; }
+    if ($ua['name'] == 'Google Chrome' && $ua['version'] < 36){ $result = true; }
+    if ($ua['name'] == 'Mozilla Firefox' && $ua['version'] < 32){ $result = true; }
+    if ($ua['name'] == 'Apple Safari' && $ua['version'] < 6){ $result = true; }
+    if ($ua['name'] == 'Opera'){ $result = true; }
+    if ($ua['name'] == 'Netscape'){ $result = true; }
 ?>
 <!DOCTYPE html>
-<html <?php language_attributes(); ?>>
+<html <?php language_attributes(); if($result){ echo 'class="bad-browser"'; }?>>
 <head>
     <meta charset="<?php bloginfo('charset'); ?>">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -46,6 +79,8 @@
     <link rel="apple-touch-icon" sizes="180x180" href="<?php echo get_template_directory_uri(); ?>/images/icons/apple-touch-icon-180x180.png" />
 	<link rel="icon" type="image/png" href="<?php echo get_template_directory_uri(); ?>/images/icons/64_favicon.png" sizes="64x64" />
 	<link rel="icon" type="image/png" href="<?php echo get_template_directory_uri(); ?>/images/icons/32_favicon.png" sizes="32x32" />
+
+    <script src="<?php bloginfo('template_directory'); ?>/js/vendor/modernizr.custom.js"></script>
 
     <script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
     <script src="<?php bloginfo('template_directory'); ?>/js/vendor/jquery-ui-1.10.3.custom.min.js"></script>
@@ -89,7 +124,8 @@
             var $wrapper = $('#wrapper .inner');
 
             $('#wrapper').smoothTouchScroll({
-                scrollableAreaClass: "inner"
+                scrollableAreaClass: "inner",
+                startAtElementId: "stormwater-sample-1"
             });
         }
 
@@ -174,7 +210,7 @@
 
             $(document).on('touchstart click', '.close-welcome', function(){
                 closeModal();
-                $.cookie('welcome', 'hidden', { expires: 14 });
+                //$.cookie('welcome', 'hidden', { expires: 14 });
             });
         }
 
@@ -206,9 +242,11 @@
             
             if ($.cookie('alert') == 'hidden'){ 
                 $('.alert').remove(); }
+            /*
             if ($.cookie('welcome') == 'hidden'){ 
                 $('.modal').remove(); 
                 $('.overlay').remove(); }
+            */
         });
     </script>
 
@@ -248,6 +286,7 @@
                 </div>
             </div>
             <div class="hotspots"></div>
+            <div id="auto-center"></div>
         </div>
     </div>
 
@@ -290,6 +329,11 @@
             <div class="overlay in"></div>
         <?php endif; ?>
     <?php endforeach; wp_reset_postdata(); ?>
+
+    <div id="not-available-modal" tabindex="-1" role="dialog">
+        <h1>Oh-no! Your browser isn't supported.</h1>
+        <h3>Unfortunately, your browser does not meet the requirements to view this site. Please ensure that you JavaScript is enabled, your operating system is up-to-date, and you have a modern supported browser (like <a href="http://www.google.com/chrome/" target="_blank">Google Chrome</a>). If you're seeing this message on a mobile device, make sure your device is updated to the latest browser version available.</h3>
+    </div>
 
     <?php wp_footer(); ?>
 </body>

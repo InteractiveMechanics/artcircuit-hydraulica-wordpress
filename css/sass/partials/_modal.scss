@@ -79,7 +79,6 @@
 }
 
 #welcome-modal {
-    margin-top: 60px;
 
     .close-welcome {
         cursor: pointer;
@@ -97,5 +96,34 @@
 
     & + .overlay.in {
         opacity: 0.65;
+    }
+}
+
+#not-available-modal {
+    display: none;
+
+    .bad-browser &,
+    .no-svg &,
+    .no-js & {
+        display: block;
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: white;
+        background: rgba(255,255,255,0.95);
+        z-index: 9999;
+    }
+
+    h1 {
+        max-width: 660px;
+        margin: 60px auto 20px;
+    }
+    h3 {
+        max-width: 660px;
+        margin: 0 auto;
+        font-size: 18px;
+        line-height: 1.6;
     }
 }
