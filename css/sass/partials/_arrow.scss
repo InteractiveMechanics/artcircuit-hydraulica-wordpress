@@ -1,0 +1,36 @@
+.arrow {
+    position: fixed; 
+    bottom: 20px; 
+    width: 60px; 
+    height: 60px; 
+    z-index: 29;
+    cursor: pointer;
+    transition: 0.5s all;
+    opacity: 0.65;
+
+    &:hover {
+        opacity: 1;
+    }
+    @media screen and #{$screen-xs} {
+        bottom: 10px;
+    }
+
+    path {
+        fill: white;
+    }
+
+    &.arrow-left { 
+        left: 20px;
+
+        @media screen and #{$screen-xs} {
+            left: 10px;
+        }
+    }
+    &.arrow-right { 
+        right: 20px; 
+
+        @media screen and #{$screen-xs} {
+            right: 10px;
+        }
+    }
+}

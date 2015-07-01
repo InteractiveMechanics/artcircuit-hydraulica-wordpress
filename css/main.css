@@ -478,4 +478,31 @@ body {
       width: 48px;
       height: 48px; } }
 
+.arrow {
+  position: fixed;
+  bottom: 20px;
+  width: 60px;
+  height: 60px;
+  z-index: 29;
+  cursor: pointer;
+  transition: 0.5s all;
+  opacity: 0.65; }
+  .arrow:hover {
+    opacity: 1; }
+  @media screen and (max-width: 767px) {
+    .arrow {
+      bottom: 10px; } }
+  .arrow path {
+    fill: white; }
+  .arrow.arrow-left {
+    left: 20px; }
+    @media screen and (max-width: 767px) {
+      .arrow.arrow-left {
+        left: 10px; } }
+  .arrow.arrow-right {
+    right: 20px; }
+    @media screen and (max-width: 767px) {
+      .arrow.arrow-right {
+        right: 10px; } }
+
 /*# sourceMappingURL=main.css.map */

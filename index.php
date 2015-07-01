@@ -85,7 +85,7 @@
     <script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
     <script src="<?php bloginfo('template_directory'); ?>/js/vendor/jquery-ui-1.10.3.custom.min.js"></script>
     <script src="<?php bloginfo('template_directory'); ?>/js/vendor/jquery.kinetic.min.js"></script>
-    <script src="<?php bloginfo('template_directory'); ?>/js/vendor/jquery.smoothTouchScroll.min.js"></script>
+    <script src="<?php bloginfo('template_directory'); ?>/js/vendor/jquery.smoothTouchScroll.js"></script>
     <script src="<?php bloginfo('template_directory'); ?>/js/vendor/jquery.cookie.js"></script>
     
     <?php include_once('inc-data.php'); ?>
@@ -124,8 +124,7 @@
             var $wrapper = $('#wrapper .inner');
 
             $('#wrapper').smoothTouchScroll({
-                scrollableAreaClass: "inner",
-                startAtElementId: "stormwater-sample-1"
+                scrollableAreaClass: "inner"
             });
         }
 
@@ -208,6 +207,19 @@
                 return true;
             });
 
+            $(document).on('click', '.arrow-left', function(){
+                $('.scrollWrapper').kinetic('start', { velocity: -30 });
+                setTimeout(function(){
+                    $('.scrollWrapper').kinetic('end');
+                }, 150);
+            });
+            $(document).on('click', '.arrow-right', function(){
+                $('.scrollWrapper').kinetic('start', { velocity: 30 });
+                setTimeout(function(){
+                    $('.scrollWrapper').kinetic('end');
+                }, 150);
+            });
+
             $(document).on('touchstart click', '.close-welcome', function(){
                 closeModal();
                 //$.cookie('welcome', 'hidden', { expires: 14 });
@@ -242,11 +254,10 @@
             
             if ($.cookie('alert') == 'hidden'){ 
                 $('.alert').remove(); }
-            /*
-            if ($.cookie('welcome') == 'hidden'){ 
+
+            /* if ($.cookie('welcome') == 'hidden'){ 
                 $('.modal').remove(); 
-                $('.overlay').remove(); }
-            */
+                $('.overlay').remove(); } */
         });
     </script>
 
@@ -268,6 +279,12 @@
             <path d="M4,10h24c1.104,0,2-0.896,2-2s-0.896-2-2-2H4C2.896,6,2,6.896,2,8S2.896,10,4,10z M28,14H4c-1.104,0-2,0.896-2,2  s0.896,2,2,2h24c1.104,0,2-0.896,2-2S29.104,14,28,14z M28,22H4c-1.104,0-2,0.896-2,2s0.896,2,2,2h24c1.104,0,2-0.896,2-2 S29.104,22,28,22z"/>
         </svg>
     </a>
+    <a class="arrow arrow-left">
+        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px" viewBox="0 0 100 125" enable-background="new 0 0 100 100" xml:space="preserve"><g><path d="M30.592,47.601c-0.068,0.069-0.131,0.138-0.189,0.206c-0.031,0.037-0.059,0.077-0.09,0.115   c-0.014,0.02-0.027,0.037-0.043,0.057C29.85,48.544,29.6,49.241,29.6,50c0,0.758,0.25,1.454,0.67,2.019   c0.018,0.026,0.037,0.052,0.057,0.077c0.025,0.03,0.047,0.062,0.074,0.093c0.059,0.072,0.123,0.144,0.195,0.216l15.104,15.104   c1.328,1.327,3.48,1.327,4.809,0c1.328-1.328,1.328-3.48,0-4.808l-9.299-9.3L67,53.399c1.879,0,3.4-1.522,3.4-3.399   s-1.521-3.399-3.4-3.399H41.209l9.299-9.3c1.328-1.328,1.328-3.48,0-4.809s-3.48-1.328-4.809,0L30.598,47.594   C30.596,47.596,30.594,47.598,30.592,47.601z"/><path d="M84,50c0-18.777-15.223-34-34-34S16,31.223,16,50s15.223,34,34,34S84,68.777,84,50z M22.799,50   c0-15.021,12.18-27.2,27.201-27.2S77.199,34.979,77.199,50S65.021,77.2,50,77.2S22.799,65.021,22.799,50z"/></g></svg>
+    </a>
+    <a class="arrow arrow-right">
+        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px" viewBox="0 0 100 125" enable-background="new 0 0 100 100" xml:space="preserve"><g><path d="M69.407,52.399c0.069-0.069,0.132-0.138,0.189-0.206c0.031-0.037,0.06-0.076,0.09-0.115   c0.015-0.02,0.028-0.037,0.043-0.057c0.42-0.564,0.67-1.262,0.671-2.021c-0.001-0.758-0.251-1.455-0.67-2.02   c-0.018-0.025-0.037-0.052-0.057-0.076c-0.025-0.03-0.048-0.062-0.075-0.093c-0.059-0.072-0.122-0.144-0.194-0.216L54.3,32.493   c-1.327-1.327-3.479-1.327-4.808,0s-1.329,3.479,0,4.808l9.299,9.3L33,46.602c-1.879-0.001-3.4,1.522-3.4,3.399   s1.521,3.398,3.4,3.399l25.791-0.001l-9.299,9.299c-1.328,1.329-1.328,3.482,0,4.811c1.328,1.327,3.48,1.327,4.808,0l15.103-15.102   C69.403,52.404,69.406,52.403,69.407,52.399z"/><path d="M16,50.001C16,68.777,31.223,84,50,84s33.999-15.223,34-34c0-18.777-15.223-34-34-34C31.223,16.001,16,31.223,16,50.001z    M77.2,50.001c0,15.021-12.179,27.199-27.2,27.2c-15.021,0-27.2-12.18-27.2-27.2c0-15.022,12.179-27.2,27.2-27.2   C65.021,22.8,77.2,34.979,77.2,50.001z"/></g></svg>
+    </a>
     <div id="wrapper" class="wrapper">
         <div class="inner">
             <div class="sky"></div>
@@ -286,7 +303,7 @@
                 </div>
             </div>
             <div class="hotspots"></div>
-            <div id="auto-center"></div>
+            <div id="auto-center" style="position: absolute; top: 0; bottom: 0;"></div>
         </div>
     </div>
 
